@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AdminLayout } from './layouts/AdminLayout';
 import { AdminGuard } from './auth/AdminGuard';
+import { AdminLoginPage } from './pages/AdminLoginPage';
 
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
 const CustomerDirectoryPage = lazy(() => import('./pages/crm/CustomerDirectoryPage').then(m => ({ default: m.CustomerDirectoryPage })));
@@ -30,43 +31,52 @@ const FallbackLoader = () => (
 
 export function App() {
   return (
-    <AdminGuard>
-      <Routes>
-        <Route path="/" element={<AdminLayout />}>
-          <Route index element={<Suspense fallback={<FallbackLoader />}><AdminDashboard /></Suspense>} />
-          
-          {/* CRM */}
-          <Route path="crm/customers" element={<Suspense fallback={<FallbackLoader />}><CustomerDirectoryPage /></Suspense>} />
-          <Route path="crm/waitlist" element={<Suspense fallback={<FallbackLoader />}><WaitlistPage /></Suspense>} />
-          <Route path="crm/subscriptions" element={<Suspense fallback={<FallbackLoader />}><SubscriptionsPage /></Suspense>} />
+    <Routes>
+      {/* Public Admin Auth Route */}
+      <Route path="/login" element={<AdminLoginPage />} />
 
-          {/* Operations */}
-          <Route path="operations/jobs" element={<Suspense fallback={<FallbackLoader />}><LiveJobsPage /></Suspense>} />
-          <Route path="operations/failed" element={<Suspense fallback={<FallbackLoader />}><FailedJobsPage /></Suspense>} />
-          <Route path="operations/workers" element={<Suspense fallback={<FallbackLoader />}><WorkersPage /></Suspense>} />
-          <Route path="operations/providers" element={<Suspense fallback={<FallbackLoader />}><ProviderHealthPage /></Suspense>} />
+      {/* Protected Admin Routes */}
+      <Route
+        path="/"
+        element={
+          <AdminGuard>
+            <AdminLayout />
+          </AdminGuard>
+        }
+      >
+        <Route index element={<Suspense fallback={<FallbackLoader />}><AdminDashboard /></Suspense>} />
+        
+        {/* CRM */}
+        <Route path="crm/customers" element={<Suspense fallback={<FallbackLoader />}><CustomerDirectoryPage /></Suspense>} />
+        <Route path="crm/waitlist" element={<Suspense fallback={<FallbackLoader />}><WaitlistPage /></Suspense>} />
+        <Route path="crm/subscriptions" element={<Suspense fallback={<FallbackLoader />}><SubscriptionsPage /></Suspense>} />
 
-          {/* Content */}
-          <Route path="content/blog" element={<Suspense fallback={<FallbackLoader />}><BlogListPage /></Suspense>} />
-          <Route path="content/blog/new" element={<Suspense fallback={<FallbackLoader />}><BlogEditorPage /></Suspense>} />
-          <Route path="content/blog/:id" element={<Suspense fallback={<FallbackLoader />}><BlogEditorPage /></Suspense>} />
-          <Route path="content/media" element={<Suspense fallback={<FallbackLoader />}><MediaLibraryPage /></Suspense>} />
+        {/* Operations */}
+        <Route path="operations/jobs" element={<Suspense fallback={<FallbackLoader />}><LiveJobsPage /></Suspense>} />
+        <Route path="operations/failed" element={<Suspense fallback={<FallbackLoader />}><FailedJobsPage /></Suspense>} />
+        <Route path="operations/workers" element={<Suspense fallback={<FallbackLoader />}><WorkersPage /></Suspense>} />
+        <Route path="operations/providers" element={<Suspense fallback={<FallbackLoader />}><ProviderHealthPage /></Suspense>} />
 
-          {/* Analytics */}
-          <Route path="analytics/business" element={<Suspense fallback={<FallbackLoader />}><BusinessAnalyticsPage /></Suspense>} />
-          <Route path="analytics/platforms" element={<Suspense fallback={<FallbackLoader />}><PlatformAnalyticsPage /></Suspense>} />
-          <Route path="analytics/ai" element={<Suspense fallback={<FallbackLoader />}><AICostAnalyticsPage /></Suspense>} />
+        {/* Content */}
+        <Route path="content/blog" element={<Suspense fallback={<FallbackLoader />}><BlogListPage /></Suspense>} />
+        <Route path="content/blog/new" element={<Suspense fallback={<FallbackLoader />}><BlogEditorPage /></Suspense>} />
+        <Route path="content/blog/:id" element={<Suspense fallback={<FallbackLoader />}><BlogEditorPage /></Suspense>} />
+        <Route path="content/media" element={<Suspense fallback={<FallbackLoader />}><MediaLibraryPage /></Suspense>} />
 
-          {/* System */}
-          <Route path="system/admins" element={<Suspense fallback={<FallbackLoader />}><AdminUsersPage /></Suspense>} />
-          <Route path="system/roles" element={<Suspense fallback={<FallbackLoader />}><RolesPermissionsPage /></Suspense>} />
-          <Route path="system/audit" element={<Suspense fallback={<FallbackLoader />}><AuditLogPage /></Suspense>} />
-          <Route path="system/settings" element={<Suspense fallback={<FallbackLoader />}><SystemSettingsPage /></Suspense>} />
-        </Route>
+        {/* Analytics */}
+        <Route path="analytics/business" element={<Suspense fallback={<FallbackLoader />}><BusinessAnalyticsPage /></Suspense>} />
+        <Route path="analytics/platforms" element={<Suspense fallback={<FallbackLoader />}><PlatformAnalyticsPage /></Suspense>} />
+        <Route path="analytics/ai" element={<Suspense fallback={<FallbackLoader />}><AICostAnalyticsPage /></Suspense>} />
 
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </AdminGuard>
+        {/* System */}
+        <Route path="system/admins" element={<Suspense fallback={<FallbackLoader />}><AdminUsersPage /></Suspense>} />
+        <Route path="system/roles" element={<Suspense fallback={<FallbackLoader />}><RolesPermissionsPage /></Suspense>} />
+        <Route path="system/audit" element={<Suspense fallback={<FallbackLoader />}><AuditLogPage /></Suspense>} />
+        <Route path="system/settings" element={<Suspense fallback={<FallbackLoader />}><SystemSettingsPage /></Suspense>} />
+      </Route>
+
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 

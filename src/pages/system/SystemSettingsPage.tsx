@@ -24,28 +24,28 @@ export const SystemSettingsPage: React.FC = () => {
           <Sliders className="w-6 h-6 text-[#FF7A00]" />
           System Settings & Feature Flags
         </h1>
-        <p className="text-xs font-bold text-zinc-400 mt-1">
+        <p className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mt-1">
           Control platform-wide feature rollouts, API rate-limit thresholds, and maintenance state.
         </p>
       </div>
 
       {/* Feature Flags Module */}
-      <div className="bg-[#121216] border-3 border-zinc-800 p-6 rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-6">
+      <div className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 p-6 rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-6">
         <h2 className="font-display font-black text-base uppercase text-white">
           Active Feature Flags
         </h2>
 
-        <div className="divide-y divide-zinc-800">
+        <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
           {flags.map((flag) => (
             <div key={flag.id} className="py-4 flex items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-black text-white">{flag.key}</span>
-                  <span className="px-2 py-0.5 rounded text-[9px] font-black uppercase bg-zinc-800 text-zinc-400 border border-zinc-700">
+                  <span className="font-mono text-xs font-black text-zinc-900 dark:text-white">{flag.key}</span>
+                  <span className="px-2 py-0.5 rounded text-[9px] font-black uppercase bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-300 dark:border-zinc-700">
                     {flag.environment}
                   </span>
                 </div>
-                <div className="text-xs text-zinc-400 font-bold mt-0.5">{flag.description}</div>
+                <div className="text-xs text-zinc-600 dark:text-zinc-400 font-bold mt-0.5">{flag.description}</div>
               </div>
 
               <button
@@ -53,7 +53,7 @@ export const SystemSettingsPage: React.FC = () => {
                 className={`p-1.5 rounded-2xl border-2 transition-all flex items-center gap-2 text-xs font-black uppercase px-3 cursor-pointer ${
                   flag.enabled
                     ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400'
-                    : 'bg-zinc-900 border-zinc-700 text-zinc-500'
+                    : 'bg-zinc-900 border-zinc-300 dark:border-zinc-700 text-zinc-500'
                 }`}
               >
                 {flag.enabled ? (
@@ -81,7 +81,7 @@ export const SystemSettingsPage: React.FC = () => {
             Emergency Maintenance State
           </h2>
         </div>
-        <p className="text-xs font-bold text-zinc-400">
+        <p className="text-xs font-bold text-zinc-600 dark:text-zinc-400">
           Toggling maintenance mode will gracefully pause all non-critical background dispatch cron jobs and present a scheduled upgrade banner to end-users.
         </p>
 
@@ -90,7 +90,7 @@ export const SystemSettingsPage: React.FC = () => {
           className={`px-5 py-2.5 rounded-2xl font-black text-xs uppercase transition-all shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] border-2 cursor-pointer ${
             maintenanceMode 
               ? 'bg-rose-600 hover:bg-rose-700 text-white border-black' 
-              : 'bg-zinc-900 border-zinc-700 hover:border-white text-zinc-300'
+              : 'bg-zinc-900 border-zinc-300 dark:border-zinc-700 hover:border-white text-zinc-700 dark:text-zinc-300'
           }`}
         >
           {maintenanceMode ? '⚠️ Maintenance Mode Active (Click to Disable)' : 'Enable Maintenance Mode'}

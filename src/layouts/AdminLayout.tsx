@@ -5,7 +5,7 @@ import { AdminHeader } from '../components/AdminHeader';
 
 export const AdminLayout: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#0E0E12] text-white flex font-sans antialiased selection:bg-[#FF7A00] selection:text-white">
+    <div className="min-h-screen bg-[#F7F5EE] dark:bg-[#0E0E12] text-zinc-900 dark:text-white flex font-sans antialiased selection:bg-[#FF7A00] selection:text-white transition-colors">
       {/* Persistent Left Sidebar */}
       <AdminSidebar />
 

@@ -17,14 +17,14 @@ export const ProviderHealthPage: React.FC = () => {
           <HeartPulse className="w-6 h-6 text-emerald-400" />
           Social & AI Provider API Health
         </h1>
-        <p className="text-xs font-bold text-zinc-400 mt-1">
+        <p className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mt-1">
           Direct latency, error rate, and availability telemetry across external platform APIs.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {providers.map((p) => (
-          <div key={p.id} className="bg-[#121216] border-3 border-zinc-800 p-6 rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+          <div key={p.id} className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 p-6 rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -35,17 +35,17 @@ export const ProviderHealthPage: React.FC = () => {
 
             <h3 className="font-display font-black text-base text-white">{p.name}</h3>
 
-            <div className="mt-6 pt-4 border-t-2 border-zinc-800 space-y-2.5 text-xs">
+            <div className="mt-6 pt-4 border-t-2 border-zinc-300 dark:border-zinc-800 space-y-2.5 text-xs">
               <div className="flex justify-between">
-                <span className="text-zinc-400 font-bold">API Latency:</span>
+                <span className="text-zinc-600 dark:text-zinc-400 font-bold">API Latency:</span>
                 <span className="text-white font-mono font-bold">{p.latency_ms}ms</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-400 font-bold">24h Requests:</span>
+                <span className="text-zinc-600 dark:text-zinc-400 font-bold">24h Requests:</span>
                 <span className="text-white font-black">{p.requests_24h.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-400 font-bold">Success Rate:</span>
+                <span className="text-zinc-600 dark:text-zinc-400 font-bold">Success Rate:</span>
                 <span className="text-emerald-400 font-mono font-black">{p.success_rate_pct}%</span>
               </div>
             </div>

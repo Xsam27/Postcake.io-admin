@@ -72,8 +72,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-start justify-center pt-24 px-4 font-sans animate-fade-in">
       <div className="bg-[#121216] border-4 border-white/20 rounded-3xl max-w-2xl w-full shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
         {/* Search Header */}
-        <div className="flex items-center px-6 py-4 border-b-2 border-zinc-800 bg-[#09090B]">
-          <Search className="w-5 h-5 text-zinc-400 mr-3 shrink-0" />
+        <div className="flex items-center px-6 py-4 border-b-2 border-zinc-300 dark:border-zinc-800 bg-[#09090B]">
+          <Search className="w-5 h-5 text-zinc-600 dark:text-zinc-400 mr-3 shrink-0" />
           <input
             type="text"
             autoFocus
@@ -96,10 +96,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                 <button
                   key={idx}
                   onClick={() => handleSelect(item.path)}
-                  className="w-full flex items-center justify-between p-3.5 rounded-2xl hover:bg-zinc-800 text-left text-zinc-300 hover:text-white transition-all group cursor-pointer"
+                  className="w-full flex items-center justify-between p-3.5 rounded-2xl hover:bg-zinc-800 text-left text-zinc-700 dark:text-zinc-300 hover:text-white transition-all group cursor-pointer"
                 >
                   <div className="flex items-center gap-3.5">
-                    <div className="p-2 rounded-xl bg-zinc-900 border border-zinc-700 text-[#FF7A00] group-hover:border-white transition-colors">
+                    <div className="p-2 rounded-xl bg-zinc-900 border border-zinc-300 dark:border-zinc-700 text-[#FF7A00] group-hover:border-white transition-colors">
                       <Icon className="w-4 h-4" />
                     </div>
                     <div>
@@ -119,7 +119,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         </div>
 
         {/* Bottom Shortcut Bar */}
-        <div className="px-6 py-3 bg-[#09090B] border-t-2 border-zinc-800 flex items-center justify-between text-[11px] font-bold text-zinc-500">
+        <div className="px-6 py-3 bg-[#09090B] border-t-2 border-zinc-300 dark:border-zinc-800 flex items-center justify-between text-[11px] font-bold text-zinc-500">
           <div>Postcake Command Center • v2.4.0</div>
           <div className="flex items-center gap-3">
             <span>↑↓ Navigate</span>

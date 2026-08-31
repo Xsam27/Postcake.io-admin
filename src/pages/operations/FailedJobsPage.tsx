@@ -48,7 +48,7 @@ export const FailedJobsPage: React.FC = () => {
             <AlertOctagon className="w-6 h-6 text-rose-500" />
             Failed Job Triage & Cluster Analysis
           </h1>
-          <p className="text-xs font-bold text-zinc-400 mt-1">
+          <p className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mt-1">
             Isolate API error spikes, investigate provider payload rejections, and trigger bulk retry pipelines.
           </p>
         </div>
@@ -67,8 +67,8 @@ export const FailedJobsPage: React.FC = () => {
       {/* Error Clusters Breakdown */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {errorClusters.map((cluster, idx) => (
-          <div key={idx} className="bg-[#121216] border-3 border-zinc-800 p-5 rounded-3xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-            <div className="text-[10px] font-black uppercase text-zinc-400">{cluster.provider}</div>
+          <div key={idx} className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 p-5 rounded-3xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <div className="text-[10px] font-black uppercase text-zinc-600 dark:text-zinc-400">{cluster.provider}</div>
             <div className="text-xl font-display font-black text-rose-400 mt-1">{cluster.code}</div>
             <div className="text-xs font-bold text-zinc-500 mt-1">{cluster.count} occurrences today</div>
           </div>
@@ -76,7 +76,7 @@ export const FailedJobsPage: React.FC = () => {
       </div>
 
       {/* Failed Jobs List */}
-      <div className="bg-[#121216] border-3 border-zinc-800 rounded-3xl p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+      <div className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 rounded-3xl p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
         <h2 className="text-sm font-black uppercase text-white tracking-wider mb-4">
           Active Failure Queue ({failedJobs.length})
         </h2>
@@ -91,7 +91,7 @@ export const FailedJobsPage: React.FC = () => {
                       {job.provider}
                     </span>
                     <span className="font-mono text-xs font-bold text-white">{job.id}</span>
-                    <span className="text-xs text-zinc-400 font-mono">{job.user_email}</span>
+                    <span className="text-xs text-zinc-600 dark:text-zinc-400 font-mono">{job.user_email}</span>
                   </div>
                   <div className="text-xs font-bold text-rose-300 mt-1">{job.error_message}</div>
                 </div>
@@ -108,7 +108,7 @@ export const FailedJobsPage: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className="py-12 text-center border-2 border-dashed border-zinc-800 rounded-2xl">
+          <div className="py-12 text-center border-2 border-dashed border-zinc-300 dark:border-zinc-800 rounded-2xl">
             <CheckCircle2 className="w-8 h-8 text-emerald-400 mx-auto mb-2" />
             <div className="font-black text-sm text-white">Zero Active Failures</div>
             <div className="text-xs text-zinc-500 font-bold mt-0.5">All background dispatch queues are performing without errors.</div>

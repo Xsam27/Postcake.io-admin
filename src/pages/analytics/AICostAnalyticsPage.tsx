@@ -16,35 +16,35 @@ export const AICostAnalyticsPage: React.FC = () => {
           <Cpu className="w-6 h-6 text-purple-400" />
           AI Token Consumption & Infrastructure Cost Tracker
         </h1>
-        <p className="text-xs font-bold text-zinc-400 mt-1">
+        <p className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mt-1">
           Monitor token consumption, prompt caching efficiency, cost per user, and API expenditures across Gemini & OpenAI.
         </p>
       </div>
 
       {/* Top Cost Breakdown Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div className="bg-[#121216] border-3 border-zinc-800 p-6 rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-          <div className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Total AI Spend (MTD)</div>
+        <div className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 p-6 rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+          <div className="text-[10px] font-black uppercase tracking-widest text-zinc-600 dark:text-zinc-400">Total AI Spend (MTD)</div>
           <div className="text-3xl font-display font-black text-white mt-1">$1,284.50</div>
           <div className="text-xs font-bold text-zinc-500 mt-1">Budget limit: $3,000.00</div>
         </div>
 
-        <div className="bg-[#121216] border-3 border-zinc-800 p-6 rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-          <div className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Avg AI Cost Per Active User</div>
+        <div className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 p-6 rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+          <div className="text-[10px] font-black uppercase tracking-widest text-zinc-600 dark:text-zinc-400">Avg AI Cost Per Active User</div>
           <div className="text-3xl font-display font-black text-emerald-400 mt-1">$0.103</div>
           <div className="text-xs font-bold text-zinc-500 mt-1">98.9% gross margin per pro sub</div>
         </div>
 
-        <div className="bg-[#121216] border-3 border-zinc-800 p-6 rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-          <div className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Total Tokens Processed</div>
+        <div className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 p-6 rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+          <div className="text-[10px] font-black uppercase tracking-widest text-zinc-600 dark:text-zinc-400">Total Tokens Processed</div>
           <div className="text-3xl font-display font-black text-purple-400 mt-1">832.4M</div>
           <div className="text-xs font-bold text-zinc-500 mt-1">218k generation requests</div>
         </div>
       </div>
 
       {/* Model Breakdown Table */}
-      <div className="bg-[#121216] border-3 border-zinc-800 rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-        <div className="p-5 border-b-2 border-zinc-800 bg-[#09090B] flex items-center justify-between">
+      <div className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+        <div className="p-5 border-b-2 border-zinc-300 dark:border-zinc-800 bg-[#09090B] flex items-center justify-between">
           <h2 className="font-display font-black text-sm uppercase text-white tracking-wider">
             Model Cost & Volume Distribution
           </h2>
@@ -52,7 +52,7 @@ export const AICostAnalyticsPage: React.FC = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="border-b-2 border-zinc-800 bg-[#09090B] text-zinc-400 font-black uppercase tracking-wider text-[10px]">
+              <tr className="border-b-2 border-zinc-300 dark:border-zinc-800 bg-[#09090B] text-zinc-600 dark:text-zinc-400 font-black uppercase tracking-wider text-[10px]">
                 <th className="py-3.5 px-5">Provider & Model</th>
                 <th className="py-3.5 px-4">Requests (30d)</th>
                 <th className="py-3.5 px-4">Input Tokens</th>
@@ -61,7 +61,7 @@ export const AICostAnalyticsPage: React.FC = () => {
                 <th className="py-3.5 px-5 text-right">% of Total</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-800 font-bold text-zinc-300 font-mono">
+            <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 font-bold text-zinc-700 dark:text-zinc-300 font-mono">
               {models.map((m, idx) => (
                 <tr key={idx} className="hover:bg-zinc-900/60 transition-colors">
                   <td className="py-3.5 px-5 font-sans font-black text-white">{m.provider}</td>

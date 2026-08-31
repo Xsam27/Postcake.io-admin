@@ -25,16 +25,16 @@ export const RolesPermissionsPage: React.FC = () => {
           <Key className="w-6 h-6 text-[#FFD700]" />
           Role-Based Access Control (RBAC) Matrix
         </h1>
-        <p className="text-xs font-bold text-zinc-400 mt-1">
+        <p className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mt-1">
           Granular permission matrix enforced across frontend navigation, API edge functions, and Supabase RLS policies.
         </p>
       </div>
 
-      <div className="bg-[#121216] border-3 border-zinc-800 rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+      <div className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="border-b-2 border-zinc-800 bg-[#09090B] text-zinc-400 font-black uppercase tracking-wider text-[10px]">
+              <tr className="border-b-2 border-zinc-300 dark:border-zinc-800 bg-[#09090B] text-zinc-600 dark:text-zinc-400 font-black uppercase tracking-wider text-[10px]">
                 <th className="py-3.5 px-5">Permission Scope</th>
                 <th className="py-3.5 px-4 text-center">Super Admin</th>
                 <th className="py-3.5 px-4 text-center">Operations</th>
@@ -42,7 +42,7 @@ export const RolesPermissionsPage: React.FC = () => {
                 <th className="py-3.5 px-4 text-center">Support</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-800 font-bold text-zinc-300">
+            <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 font-bold text-zinc-700 dark:text-zinc-300">
               {permissions.map((p, idx) => (
                 <tr key={idx} className="hover:bg-zinc-900/60 transition-colors">
                   <td className="py-3.5 px-5">

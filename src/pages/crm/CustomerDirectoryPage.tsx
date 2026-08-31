@@ -64,14 +64,14 @@ export const CustomerDirectoryPage: React.FC = () => {
             <Users className="w-6 h-6 text-[#8C9EFF]" />
             Customer Directory
           </h1>
-          <p className="text-xs font-bold text-zinc-400 mt-1">
+          <p className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mt-1">
             Manage user accounts, connected platforms, subscription tiers, and account security.
           </p>
         </div>
 
         <button
           onClick={exportCSV}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-zinc-900 border-2 border-zinc-700 hover:border-white text-xs font-black uppercase text-white transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-zinc-900 border-2 border-zinc-300 dark:border-zinc-700 hover:border-white text-xs font-black uppercase text-white transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] cursor-pointer"
         >
           <Download className="w-3.5 h-3.5" />
           Export CSV ({filtered.length})
@@ -79,15 +79,15 @@ export const CustomerDirectoryPage: React.FC = () => {
       </div>
 
       {/* Filter & Search Bar */}
-      <div className="bg-[#121216] border-3 border-zinc-800 p-4 rounded-3xl flex flex-col md:flex-row gap-3 items-center justify-between shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+      <div className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 p-4 rounded-3xl flex flex-col md:flex-row gap-3 items-center justify-between shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
         <div className="relative w-full md:w-80">
-          <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-3" />
+          <Search className="w-4 h-4 text-zinc-600 dark:text-zinc-400 absolute left-3.5 top-3" />
           <input
             type="text"
             placeholder="Search by customer name or email..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-zinc-900 border-2 border-zinc-700 text-white text-xs font-bold rounded-xl focus:outline-none focus:border-white"
+            className="w-full pl-10 pr-4 py-2 bg-zinc-900 border-2 border-zinc-300 dark:border-zinc-700 text-white text-xs font-bold rounded-xl focus:outline-none focus:border-white"
           />
         </div>
 
@@ -96,7 +96,7 @@ export const CustomerDirectoryPage: React.FC = () => {
           <select
             value={planFilter}
             onChange={e => setPlanFilter(e.target.value)}
-            className="bg-zinc-900 border-2 border-zinc-700 text-xs font-black uppercase text-zinc-300 rounded-xl px-3 py-2 focus:outline-none cursor-pointer"
+            className="bg-zinc-900 border-2 border-zinc-300 dark:border-zinc-700 text-xs font-black uppercase text-zinc-700 dark:text-zinc-300 rounded-xl px-3 py-2 focus:outline-none cursor-pointer"
           >
             <option value="all">All Plans</option>
             <option value="free">Free</option>
@@ -109,7 +109,7 @@ export const CustomerDirectoryPage: React.FC = () => {
           <select
             value={statusFilter}
             onChange={e => setStatusFilter(e.target.value)}
-            className="bg-zinc-900 border-2 border-zinc-700 text-xs font-black uppercase text-zinc-300 rounded-xl px-3 py-2 focus:outline-none cursor-pointer"
+            className="bg-zinc-900 border-2 border-zinc-300 dark:border-zinc-700 text-xs font-black uppercase text-zinc-700 dark:text-zinc-300 rounded-xl px-3 py-2 focus:outline-none cursor-pointer"
           >
             <option value="all">All Statuses</option>
             <option value="active">Active</option>
@@ -120,11 +120,11 @@ export const CustomerDirectoryPage: React.FC = () => {
       </div>
 
       {/* Dense High-Performance Data Table */}
-      <div className="bg-[#121216] border-3 border-zinc-800 rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+      <div className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="border-b-2 border-zinc-800 bg-[#09090B] text-zinc-400 font-black uppercase tracking-wider text-[10px]">
+              <tr className="border-b-2 border-zinc-300 dark:border-zinc-800 bg-[#09090B] text-zinc-600 dark:text-zinc-400 font-black uppercase tracking-wider text-[10px]">
                 <th className="py-3.5 px-5">Customer</th>
                 <th className="py-3.5 px-4">Plan & MRR</th>
                 <th className="py-3.5 px-4">Status</th>
@@ -134,7 +134,7 @@ export const CustomerDirectoryPage: React.FC = () => {
                 <th className="py-3.5 px-5 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-800 font-bold text-zinc-300">
+            <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 font-bold text-zinc-700 dark:text-zinc-300">
               {filtered.map((c) => (
                 <tr key={c.id} className="hover:bg-zinc-900/60 transition-colors">
                   {/* Customer Info */}
@@ -145,17 +145,17 @@ export const CustomerDirectoryPage: React.FC = () => {
                       </div>
                       <div>
                         <div className="font-black text-white">{c.name}</div>
-                        <div className="text-[11px] text-zinc-400 font-mono">{c.email}</div>
+                        <div className="text-[11px] text-zinc-600 dark:text-zinc-400 font-mono">{c.email}</div>
                       </div>
                     </div>
                   </td>
 
                   {/* Plan & MRR */}
                   <td className="py-3.5 px-4">
-                    <span className="px-2 py-0.5 rounded-lg bg-zinc-800 border border-zinc-700 text-white font-black text-[10px] uppercase">
+                    <span className="px-2 py-0.5 rounded-lg bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-white font-black text-[10px] uppercase">
                       {c.plan}
                     </span>
-                    <span className="ml-2 font-mono text-zinc-400 font-bold">
+                    <span className="ml-2 font-mono text-zinc-600 dark:text-zinc-400 font-bold">
                       ${c.mrr_contribution}/mo
                     </span>
                   </td>
@@ -175,7 +175,7 @@ export const CustomerDirectoryPage: React.FC = () => {
                   <td className="py-3.5 px-4">
                     <div className="flex flex-wrap gap-1">
                       {c.connected_platforms.map((p, idx) => (
-                        <span key={idx} className="px-1.5 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-[10px] text-zinc-300">
+                        <span key={idx} className="px-1.5 py-0.5 rounded bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-[10px] text-zinc-700 dark:text-zinc-300">
                           {p}
                         </span>
                       ))}
@@ -183,12 +183,12 @@ export const CustomerDirectoryPage: React.FC = () => {
                   </td>
 
                   {/* Published */}
-                  <td className="py-3.5 px-4 font-mono text-zinc-300">
+                  <td className="py-3.5 px-4 font-mono text-zinc-700 dark:text-zinc-300">
                     {c.posts_count.toLocaleString()} posts
                   </td>
 
                   {/* Last Active */}
-                  <td className="py-3.5 px-4 text-zinc-400 text-[11px]">
+                  <td className="py-3.5 px-4 text-zinc-600 dark:text-zinc-400 text-[11px]">
                     {new Date(c.last_active).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </td>
 
@@ -211,8 +211,8 @@ export const CustomerDirectoryPage: React.FC = () => {
       {/* Customer Detail Drawer Modal */}
       {selectedCustomer && (
         <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex justify-end animate-fade-in font-sans">
-          <div className="bg-[#121216] border-l-4 border-zinc-700 w-full max-w-lg h-full p-8 overflow-y-auto space-y-6 shadow-2xl">
-            <div className="flex items-center justify-between border-b-2 border-zinc-800 pb-4">
+          <div className="bg-[#121216] border-l-4 border-zinc-300 dark:border-zinc-700 w-full max-w-lg h-full p-8 overflow-y-auto space-y-6 shadow-2xl">
+            <div className="flex items-center justify-between border-b-2 border-zinc-300 dark:border-zinc-800 pb-4">
               <h2 className="text-xl font-display font-black uppercase text-white">
                 Customer Dossier
               </h2>
@@ -225,19 +225,19 @@ export const CustomerDirectoryPage: React.FC = () => {
             </div>
 
             {/* Profile Overview */}
-            <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-2">
+            <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-300 dark:border-zinc-800 space-y-2">
               <div className="text-xs font-black uppercase text-[#FF7A00]">Account Summary</div>
-              <div className="text-lg font-black text-white">{selectedCustomer.name}</div>
-              <div className="text-xs text-zinc-400 font-mono">{selectedCustomer.email}</div>
+              <div className="text-lg font-black text-zinc-900 dark:text-white">{selectedCustomer.name}</div>
+              <div className="text-xs text-zinc-600 dark:text-zinc-400 font-mono">{selectedCustomer.email}</div>
               <div className="text-xs text-zinc-500 font-bold">Customer ID: {selectedCustomer.id}</div>
             </div>
 
             {/* Connected Accounts Details */}
             <div className="space-y-2">
-              <div className="text-xs font-black uppercase tracking-wider text-zinc-400">Connected Channels</div>
+              <div className="text-xs font-black uppercase tracking-wider text-zinc-600 dark:text-zinc-400">Connected Channels</div>
               <div className="space-y-2">
                 {selectedCustomer.connected_platforms.map((p, idx) => (
-                  <div key={idx} className="p-3 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-between text-xs">
+                  <div key={idx} className="p-3 rounded-xl bg-zinc-900 border border-zinc-300 dark:border-zinc-800 flex items-center justify-between text-xs">
                     <span className="font-bold text-white">{p}</span>
                     <span className="text-[10px] font-black text-emerald-400 uppercase">Token Active</span>
                   </div>
@@ -246,21 +246,21 @@ export const CustomerDirectoryPage: React.FC = () => {
             </div>
 
             {/* Subscription Controls */}
-            <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-3">
-              <div className="text-xs font-black uppercase text-zinc-400">Subscription & Billing</div>
+            <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-300 dark:border-zinc-800 space-y-3">
+              <div className="text-xs font-black uppercase text-zinc-600 dark:text-zinc-400">Subscription & Billing</div>
               <div className="flex justify-between items-center text-xs">
-                <span className="text-zinc-400">Current Plan:</span>
+                <span className="text-zinc-600 dark:text-zinc-400">Current Plan:</span>
                 <span className="font-black text-white uppercase">{selectedCustomer.plan} (${selectedCustomer.mrr_contribution}/mo)</span>
               </div>
               <div className="flex justify-between items-center text-xs">
-                <span className="text-zinc-400">Account Status:</span>
+                <span className="text-zinc-600 dark:text-zinc-400">Account Status:</span>
                 <span className="font-black text-white uppercase">{selectedCustomer.status}</span>
               </div>
             </div>
 
             {/* Account Safety Controls */}
-            <div className="space-y-3 pt-4 border-t-2 border-zinc-800">
-              <div className="text-xs font-black uppercase text-zinc-400">Security & Enforcement</div>
+            <div className="space-y-3 pt-4 border-t-2 border-zinc-300 dark:border-zinc-800">
+              <div className="text-xs font-black uppercase text-zinc-600 dark:text-zinc-400">Security & Enforcement</div>
               {selectedCustomer.status === 'active' ? (
                 <button
                   onClick={() => handleStatusChange(selectedCustomer.id, 'suspended')}

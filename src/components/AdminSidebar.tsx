@@ -84,14 +84,14 @@ export const AdminSidebar: React.FC = () => {
   const location = useLocation();
 
   return (
-    <aside className="w-64 bg-[#09090B] border-r-3 border-zinc-800 flex flex-col justify-between shrink-0 h-screen sticky top-0 font-sans z-40 select-none overflow-y-auto">
+    <aside className="w-64 bg-white dark:bg-[#09090B] border-r-3 border-zinc-300 dark:border-zinc-800 flex flex-col justify-between shrink-0 h-screen sticky top-0 font-sans z-40 select-none overflow-y-auto transition-colors">
       {/* Brand Header */}
       <div>
-        <div className="h-16 px-6 border-b-3 border-zinc-800 flex items-center justify-between">
+        <div className="h-16 px-6 border-b-3 border-zinc-300 dark:border-zinc-800 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <PostcakeLogo iconSize={32} />
           </div>
-          <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-[#FF7A00] text-white border border-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+          <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-[#FF7A00] text-black border border-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
             HQ
           </span>
         </div>
@@ -100,7 +100,7 @@ export const AdminSidebar: React.FC = () => {
         <div className="p-4 space-y-6">
           {navSections.map((section, sIdx) => (
             <div key={sIdx} className="space-y-1">
-              <div className="px-3 text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-1.5">
+              <div className="px-3 text-[10px] font-black uppercase tracking-widest text-zinc-500 dark:text-zinc-500 mb-1.5">
                 {section.title}
               </div>
               {section.items.map((item, iIdx) => {
@@ -115,12 +115,12 @@ export const AdminSidebar: React.FC = () => {
                     to={item.to}
                     className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl font-black text-xs transition-all ${
                       isActive
-                        ? 'bg-zinc-800 text-white border-2 border-white/20 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                        : 'text-zinc-400 hover:text-white hover:bg-zinc-900 border-2 border-transparent'
+                        ? 'bg-zinc-900 text-white dark:bg-zinc-800 dark:text-white border-2 border-black dark:border-white/20 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
+                        : 'text-zinc-600 hover:text-black hover:bg-zinc-100 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-900 border-2 border-transparent'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
-                      <Icon className={`w-4 h-4 ${isActive ? 'text-[#FF7A00]' : 'text-zinc-500'}`} />
+                      <Icon className={`w-4 h-4 ${isActive ? 'text-[#FF7A00]' : 'text-zinc-400 dark:text-zinc-500'}`} />
                       <span>{item.label}</span>
                     </div>
                     {item.badge && (
@@ -137,11 +137,11 @@ export const AdminSidebar: React.FC = () => {
       </div>
 
       {/* Footer Info */}
-      <div className="p-4 border-t-2 border-zinc-900 text-center">
-        <div className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">
+      <div className="p-4 border-t-2 border-zinc-200 dark:border-zinc-200 dark:border-zinc-900 text-center">
+        <div className="text-[10px] font-black text-zinc-500 dark:text-zinc-600 uppercase tracking-widest">
           Postcake Command • v2.4.0
         </div>
-        <div className="text-[9px] font-bold text-zinc-600 mt-0.5">
+        <div className="text-[9px] font-bold text-zinc-400 dark:text-zinc-600 mt-0.5">
           Production Environment
         </div>
       </div>

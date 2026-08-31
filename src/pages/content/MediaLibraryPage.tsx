@@ -25,7 +25,7 @@ export const MediaLibraryPage: React.FC = () => {
             <Image className="w-6 h-6 text-[#FF7A00]" />
             Supabase Storage & Media Library
           </h1>
-          <p className="text-xs font-bold text-zinc-400 mt-1">
+          <p className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mt-1">
             Manage CDN media assets, blog cover images, and open-graph marketing banners.
           </p>
         </div>
@@ -40,8 +40,8 @@ export const MediaLibraryPage: React.FC = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         {mediaFiles.map((file) => (
-          <div key={file.id} className="bg-[#121216] border-3 border-zinc-800 rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
-            <div className="h-40 bg-zinc-900 flex items-center justify-center p-4 border-b-2 border-zinc-800 overflow-hidden">
+          <div key={file.id} className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
+            <div className="h-40 bg-zinc-900 flex items-center justify-center p-4 border-b-2 border-zinc-300 dark:border-zinc-800 overflow-hidden">
               <img src={file.url} alt={file.name} className="max-h-full object-contain" />
             </div>
 
@@ -51,7 +51,7 @@ export const MediaLibraryPage: React.FC = () => {
                 <div className="text-[11px] text-zinc-500 font-bold">{file.size} • {file.dimensions}</div>
               </div>
 
-              <div className="flex items-center gap-2 pt-2 border-t border-zinc-800">
+              <div className="flex items-center gap-2 pt-2 border-t border-zinc-300 dark:border-zinc-800">
                 <button
                   onClick={() => handleCopy(file.url)}
                   className="flex-1 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer"
@@ -63,7 +63,7 @@ export const MediaLibraryPage: React.FC = () => {
                   href={file.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white"
+                  className="p-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 hover:text-white"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>

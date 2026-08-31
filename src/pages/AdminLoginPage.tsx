@@ -58,7 +58,7 @@ export const AdminLoginPage: React.FC = () => {
         if (data?.session) {
           navigate(redirectUrl, { replace: true });
         } else {
-          setSuccessMessage('Admin account created successfully! You can now sign in.');
+          setSuccessMessage('Admin account created! Please confirm your email (if required by Supabase), then sign in.');
           setMode('signin');
         }
       }
@@ -71,13 +71,13 @@ export const AdminLoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#09090B] dark:bg-[#09090B] light:bg-[#F7F5EE] text-white light:text-zinc-900 flex flex-col items-center justify-center p-6 font-sans relative selection:bg-[#FF7A00] selection:text-white transition-colors">
+    <div className="min-h-screen bg-[#F7F5EE] dark:bg-[#09090B] text-zinc-900 dark:text-white flex flex-col items-center justify-center p-6 font-sans relative selection:bg-[#FF7A00] selection:text-white transition-colors">
       {/* Top Right Theme Toggle */}
       <div className="absolute top-6 right-6 z-20">
         <button
           type="button"
           onClick={toggleTheme}
-          className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-zinc-900 dark:bg-zinc-900 light:bg-white border-2 border-zinc-700 light:border-zinc-300 hover:border-[#FF7A00] text-zinc-300 light:text-zinc-700 font-bold text-xs shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] cursor-pointer transition-all"
+          className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white dark:bg-zinc-900 border-2 border-zinc-300 dark:border-zinc-700 hover:border-[#FF7A00] text-zinc-700 dark:text-zinc-300 font-bold text-xs shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] cursor-pointer transition-all"
         >
           {theme === 'dark' ? (
             <>
@@ -96,7 +96,7 @@ export const AdminLoginPage: React.FC = () => {
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#FF7A00]/10 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="w-full max-w-md bg-[#121216] dark:bg-[#121216] light:bg-white border-4 border-zinc-800 light:border-black rounded-3xl p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative z-10 space-y-6 transition-colors">
+      <div className="w-full max-w-md bg-white dark:bg-[#121216] border-4 border-black dark:border-zinc-800 rounded-3xl p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative z-10 space-y-6 transition-colors">
         {/* Header Branding */}
         <div className="text-center space-y-2">
           <div className="flex justify-center mb-4">
@@ -105,23 +105,23 @@ export const AdminLoginPage: React.FC = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF7A00]/20 border border-[#FF7A00]/40 text-[#FF7A00] text-[10px] font-black uppercase tracking-widest">
             <Lock className="w-3 h-3" /> HQ Operations Clearance
           </div>
-          <h1 className="text-2xl font-display font-black uppercase tracking-tight text-white light:text-black">
+          <h1 className="text-2xl font-display font-black uppercase tracking-tight text-black dark:text-white">
             Postcake Command Center
           </h1>
-          <p className="text-xs font-bold text-zinc-400 light:text-zinc-600">
+          <p className="text-xs font-bold text-zinc-600 dark:text-zinc-400">
             {mode === 'signin' ? 'Sign in with authorized administrative credentials.' : 'Register a new Administrator account.'}
           </p>
         </div>
 
         {/* Auth Mode Switcher Tabs */}
-        <div className="flex rounded-2xl bg-zinc-900 dark:bg-zinc-900 light:bg-zinc-100 p-1 border-2 border-zinc-800 light:border-zinc-300">
+        <div className="flex rounded-2xl bg-zinc-100 dark:bg-zinc-900 p-1 border-2 border-zinc-300 dark:border-zinc-800">
           <button
             type="button"
             onClick={() => { setMode('signin'); setErrorMessage(null); }}
             className={`flex-1 py-2 rounded-xl text-xs font-black uppercase transition-all cursor-pointer ${
               mode === 'signin'
                 ? 'bg-[#FF7A00] text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                : 'text-zinc-400 light:text-zinc-600 hover:text-white light:hover:text-black'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
             }`}
           >
             Sign In
@@ -132,7 +132,7 @@ export const AdminLoginPage: React.FC = () => {
             className={`flex-1 py-2 rounded-xl text-xs font-black uppercase transition-all cursor-pointer ${
               mode === 'signup'
                 ? 'bg-[#FF7A00] text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-                : 'text-zinc-400 light:text-zinc-600 hover:text-white light:hover:text-black'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
             }`}
           >
             Create Admin
@@ -159,7 +159,7 @@ export const AdminLoginPage: React.FC = () => {
         <form onSubmit={handleAuth} className="space-y-4">
           {mode === 'signup' && (
             <div>
-              <label className="block text-[11px] font-black uppercase tracking-wider text-zinc-400 light:text-zinc-700 mb-1.5">
+              <label className="block text-[11px] font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-400 mb-1.5">
                 Admin Full Name
               </label>
               <input
@@ -168,13 +168,13 @@ export const AdminLoginPage: React.FC = () => {
                 placeholder="Mausam Verma"
                 value={name}
                 onChange={e => setName(e.target.value)}
-                className="w-full px-4 py-3.5 bg-zinc-900 dark:bg-zinc-900 light:bg-zinc-50 border-2 border-zinc-700 light:border-zinc-300 text-white light:text-black font-bold text-xs rounded-2xl focus:outline-none focus:border-[#FF7A00] transition-colors"
+                className="w-full px-4 py-3.5 bg-zinc-50 dark:bg-zinc-900 border-2 border-zinc-300 dark:border-zinc-700 text-black dark:text-white font-bold text-xs rounded-2xl focus:outline-none focus:border-[#FF7A00] transition-colors"
               />
             </div>
           )}
 
           <div>
-            <label className="block text-[11px] font-black uppercase tracking-wider text-zinc-400 light:text-zinc-700 mb-1.5">
+            <label className="block text-[11px] font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-400 mb-1.5">
               Admin Email
             </label>
             <input
@@ -183,12 +183,12 @@ export const AdminLoginPage: React.FC = () => {
               placeholder="admin@postcake.io"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              className="w-full px-4 py-3.5 bg-zinc-900 dark:bg-zinc-900 light:bg-zinc-50 border-2 border-zinc-700 light:border-zinc-300 text-white light:text-black font-bold text-xs rounded-2xl focus:outline-none focus:border-[#FF7A00] transition-colors"
+              className="w-full px-4 py-3.5 bg-zinc-50 dark:bg-zinc-900 border-2 border-zinc-300 dark:border-zinc-700 text-black dark:text-white font-bold text-xs rounded-2xl focus:outline-none focus:border-[#FF7A00] transition-colors"
             />
           </div>
 
           <div>
-            <label className="block text-[11px] font-black uppercase tracking-wider text-zinc-400 light:text-zinc-700 mb-1.5">
+            <label className="block text-[11px] font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-400 mb-1.5">
               Password
             </label>
             <input
@@ -198,7 +198,7 @@ export const AdminLoginPage: React.FC = () => {
               placeholder="••••••••"
               value={password}
               onChange={e => setPassword(e.target.value)}
-              className="w-full px-4 py-3.5 bg-zinc-900 dark:bg-zinc-900 light:bg-zinc-50 border-2 border-zinc-700 light:border-zinc-300 text-white light:text-black font-bold text-xs rounded-2xl focus:outline-none focus:border-[#FF7A00] transition-colors"
+              className="w-full px-4 py-3.5 bg-zinc-50 dark:bg-zinc-900 border-2 border-zinc-300 dark:border-zinc-700 text-black dark:text-white font-bold text-xs rounded-2xl focus:outline-none focus:border-[#FF7A00] transition-colors"
             />
           </div>
 
@@ -224,7 +224,7 @@ export const AdminLoginPage: React.FC = () => {
         </form>
 
         {/* Security Info */}
-        <div className="text-center text-[10px] font-bold text-zinc-500 light:text-zinc-600 pt-2 border-t border-zinc-800/80 light:border-zinc-200">
+        <div className="text-center text-[10px] font-bold text-zinc-600 dark:text-zinc-500 pt-2 border-t border-zinc-200 dark:border-zinc-800/80">
           Super Admin clearance required. All administrative actions are recorded.
         </div>
       </div>

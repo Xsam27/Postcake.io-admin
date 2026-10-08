@@ -82,15 +82,21 @@ const navSections: NavSection[] = [
 
 export const AdminSidebar: React.FC = () => {
   const location = useLocation();
+  const isUnified = location.pathname.startsWith('/admin');
+
+  const getTargetPath = (to: string) => {
+    if (!isUnified) return to;
+    return to === '/' ? '/admin' : `/admin${to}`;
+  };
 
   return (
     <aside className="w-64 bg-white dark:bg-[#09090B] border-r-3 border-zinc-300 dark:border-zinc-800 flex flex-col justify-between shrink-0 h-screen sticky top-0 font-sans z-40 select-none overflow-y-auto transition-colors">
       {/* Brand Header */}
       <div>
         <div className="h-16 px-6 border-b-3 border-zinc-300 dark:border-zinc-800 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <NavLink to={getTargetPath('/')} className="flex items-center gap-2">
             <PostcakeLogo iconSize={32} />
-          </div>
+          </NavLink>
           <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-[#FF7A00] text-black border border-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
             HQ
           </span>
@@ -105,14 +111,15 @@ export const AdminSidebar: React.FC = () => {
               </div>
               {section.items.map((item, iIdx) => {
                 const Icon = item.icon;
-                const isActive = item.to === '/' 
-                  ? location.pathname === '/' 
-                  : location.pathname.startsWith(item.to);
+                const targetPath = getTargetPath(item.to);
+                const isActive = item.to === '/'
+                  ? (location.pathname === '/' || location.pathname === '/admin')
+                  : location.pathname.startsWith(targetPath);
 
                 return (
                   <NavLink
                     key={iIdx}
-                    to={item.to}
+                    to={targetPath}
                     className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl font-black text-xs transition-all ${
                       isActive
                         ? 'bg-zinc-900 text-white dark:bg-zinc-800 dark:text-white border-2 border-black dark:border-white/20 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'

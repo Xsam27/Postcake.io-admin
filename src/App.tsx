@@ -34,6 +34,7 @@ export function App() {
     <Routes>
       {/* Public Admin Auth Route */}
       <Route path="/login" element={<AdminLoginPage />} />
+      <Route path="/admin/login" element={<AdminLoginPage />} />
 
       {/* Protected Admin Routes */}
       <Route

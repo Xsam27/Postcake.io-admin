@@ -108,10 +108,10 @@ export const AdminDashboard: React.FC = () => {
             <Users className="w-4 h-4 text-[#8C9EFF]" />
           </div>
           <div className="text-2xl lg:text-3xl font-display font-black text-white">
-            {summary?.totalUsers?.toLocaleString() || '12,481'}
+            {summary?.totalUsers !== undefined ? summary.totalUsers.toLocaleString() : '0'}
           </div>
           <div className="text-[11px] font-bold text-emerald-400 mt-1 flex items-center gap-1">
-            <TrendingUp className="w-3 h-3" /> +14.2% this week
+            <TrendingUp className="w-3 h-3" /> Live Registered Users
           </div>
         </div>
 
@@ -122,10 +122,10 @@ export const AdminDashboard: React.FC = () => {
             <DollarSign className="w-4 h-4 text-[#FFD700]" />
           </div>
           <div className="text-2xl lg:text-3xl font-display font-black text-white">
-            ${summary?.activeMRR?.toLocaleString() || '18,420'}
+            ${summary?.activeMRR !== undefined ? summary.activeMRR.toLocaleString() : '0.00'}
           </div>
           <div className="text-[11px] font-bold text-emerald-400 mt-1 flex items-center gap-1">
-            <TrendingUp className="w-3 h-3" /> ARR: $221k
+            <TrendingUp className="w-3 h-3" /> ARR: ${((summary?.activeMRR || 0) * 12).toLocaleString()}
           </div>
         </div>
 
@@ -136,7 +136,7 @@ export const AdminDashboard: React.FC = () => {
             <Flame className="w-4 h-4 text-[#FF7A00]" />
           </div>
           <div className="text-2xl lg:text-3xl font-display font-black text-[#FF7A00]">
-            {summary?.waitlistCount || 142}
+            {summary?.waitlistCount !== undefined ? summary.waitlistCount.toLocaleString() : '0'}
           </div>
           <Link to="/admin/crm/waitlist" className="text-[11px] font-black text-zinc-600 dark:text-zinc-400 hover:text-white mt-1 block">
             Review Applications →
@@ -153,7 +153,7 @@ export const AdminDashboard: React.FC = () => {
             {failedJobs.length}
           </div>
           <div className="text-[11px] font-bold mt-1 text-zinc-600 dark:text-zinc-400">
-            {failedJobs.length > 0 ? 'Action needed' : '0 errors'}
+            {failedJobs.length > 0 ? 'Action needed' : '0 errors (All Nominal)'}
           </div>
         </div>
 
@@ -164,7 +164,7 @@ export const AdminDashboard: React.FC = () => {
             <Cpu className="w-4 h-4 text-purple-400" />
           </div>
           <div className="text-2xl lg:text-3xl font-display font-black text-white">
-            ${summary?.aiMonthlyCost?.toFixed(2) || '1,284.50'}
+            ${summary?.aiMonthlyCost !== undefined ? summary.aiMonthlyCost.toFixed(2) : '0.00'}
           </div>
           <div className="text-[11px] font-bold text-zinc-500 mt-1">
             Gemini & OpenAI API

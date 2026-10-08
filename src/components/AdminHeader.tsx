@@ -12,7 +12,7 @@ import {
   Moon
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth, clearAdminSession } from '../hooks/useAuth';
 import { useTheme } from '../hooks/useTheme';
 import { supabase } from '../lib/supabase';
 import { CommandPalette } from './CommandPalette';
@@ -28,7 +28,7 @@ export const AdminHeader: React.FC = () => {
   const userName = session?.user?.user_metadata?.name || userEmail.split('@')[0];
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    await clearAdminSession();
     navigate('/login');
   };
 

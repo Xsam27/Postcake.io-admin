@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   Search, 
   Users, 
@@ -23,6 +23,16 @@ interface CommandPaletteProps {
 export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+  const isUnified = location.pathname.startsWith('/admin');
+
+  const getTargetPath = (path: string) => {
+    if (isUnified) {
+      return path;
+    }
+    if (path === '/admin') return '/';
+    return path.replace(/^\/admin/, '');
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -64,7 +74,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
   );
 
   const handleSelect = (path: string) => {
-    navigate(path);
+    navigate(getTargetPath(path));
     onClose();
   };
 

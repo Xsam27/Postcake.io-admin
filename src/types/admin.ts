@@ -37,7 +37,7 @@ export interface CustomerRecord {
   name: string;
   email: string;
   avatar_url?: string;
-  plan: 'free' | 'pro' | 'team' | 'enterprise';
+  plan: 'free' | 'starter' | 'pro' | 'agency' | 'team' | 'enterprise';
   status: 'active' | 'suspended' | 'trialing' | 'cancelled';
   connected_platforms: string[];
   posts_count: number;
@@ -45,6 +45,9 @@ export interface CustomerRecord {
   signup_date: string;
   mrr_contribution: number;
   notes_count?: number;
+  is_admin_override?: boolean;
+  override_reason?: string;
+  custom_limits?: Record<string, any>;
 }
 
 export interface EarlySignupRecord {
@@ -160,4 +163,48 @@ export interface FeatureFlag {
   enabled: boolean;
   environment: 'production' | 'staging' | 'all';
   updated_at: string;
+}
+
+export interface PlanConfig {
+  id?: string;
+  plan_id: string;
+  name: string;
+  monthly_price_usd: number;
+  annual_price_usd: number;
+  stripe_price_id_monthly?: string | null;
+  stripe_price_id_annual?: string | null;
+  limits: {
+    social_accounts: number;
+    posts_per_month: number;
+    manychat_rules: number;
+    dms_per_month: number;
+    ai_tokens_per_month: number;
+  };
+  features: {
+    analytics: string;
+    team_seats: number;
+    watermark_removal: boolean;
+    priority_support: boolean;
+    white_label?: boolean;
+    webhooks?: boolean;
+    api_access?: boolean;
+    dedicated_sla?: boolean;
+    custom_contracts?: boolean;
+  };
+  is_active: boolean;
+  sort_order: number;
+}
+
+export interface CustomerPlanOverride {
+  workspaceId: string;
+  planTier: string;
+  isAdminOverride: boolean;
+  reason?: string;
+  customLimits?: {
+    social_accounts?: number;
+    posts_per_month?: number;
+    manychat_rules?: number;
+    dms_per_month?: number;
+    ai_tokens_per_month?: number;
+  };
 }

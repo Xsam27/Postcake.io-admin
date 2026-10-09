@@ -171,6 +171,8 @@ export interface PlanConfig {
   name: string;
   monthly_price_usd: number;
   annual_price_usd: number;
+  razorpay_plan_id_monthly?: string | null;
+  razorpay_plan_id_annual?: string | null;
   stripe_price_id_monthly?: string | null;
   stripe_price_id_annual?: string | null;
   limits: {

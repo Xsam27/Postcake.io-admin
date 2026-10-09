@@ -135,7 +135,7 @@ export const SubscriptionsPage: React.FC = () => {
             ${summary.totalMRR.toLocaleString()}
           </div>
           <div className="text-xs font-bold text-emerald-400 mt-1 flex items-center gap-1">
-            <TrendingUp className="w-3.5 h-3.5" /> Live Stripe synchronization
+            <TrendingUp className="w-3.5 h-3.5" /> Live Razorpay Synchronization
           </div>
         </div>
 
@@ -290,6 +290,30 @@ export const SubscriptionsPage: React.FC = () => {
                           <option value="active">Active (Available for Checkout)</option>
                           <option value="inactive">Inactive / Hidden</option>
                         </select>
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400 block mb-1">
+                          Razorpay Plan ID (Monthly)
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g. plan_Nxxxxxxx_monthly"
+                          value={editFormData.razorpay_plan_id_monthly || ''}
+                          onChange={(e) => setEditFormData({ ...editFormData, razorpay_plan_id_monthly: e.target.value })}
+                          className="w-full px-3 py-2 bg-zinc-900 border-2 border-zinc-700 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-[#FFD700]"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400 block mb-1">
+                          Razorpay Plan ID (Annual)
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g. plan_Nxxxxxxx_annual"
+                          value={editFormData.razorpay_plan_id_annual || ''}
+                          onChange={(e) => setEditFormData({ ...editFormData, razorpay_plan_id_annual: e.target.value })}
+                          className="w-full px-3 py-2 bg-zinc-900 border-2 border-zinc-700 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-[#FFD700]"
+                        />
                       </div>
                     </div>
 

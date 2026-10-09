@@ -355,7 +355,7 @@ export const CustomerDirectoryPage: React.FC = () => {
                   </span>
                 </label>
                 <p className="text-[10px] text-zinc-400 font-medium pl-5">
-                  Bypasses Stripe subscription expiration and unlocks custom quota ceilings.
+                  Bypasses Razorpay subscription expiration and unlocks custom quota ceilings.
                 </p>
               </div>
 

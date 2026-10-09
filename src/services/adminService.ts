@@ -87,6 +87,36 @@ class AdminService {
   // 2. Customers CRM (Real Workspaces & Subscriptions Table)
   async getCustomers(): Promise<CustomerRecord[]> {
     try {
+      // 1. Try querying the unified admin view which joins auth.users emails
+      const { data: viewData, error: viewError } = await supabase
+        .from('admin_customer_directory')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (!viewError && Array.isArray(viewData) && viewData.length > 0) {
+        return viewData.map((w: any) => {
+          const tier = (w.plan_tier || w.plan || 'starter').toLowerCase();
+          const mrr = tier === 'starter' ? 29 : tier === 'pro' ? 79 : (tier === 'agency' || tier === 'team') ? 199 : tier === 'enterprise' ? 999 : 0;
+          return {
+            id: w.id,
+            name: w.name || w.owner_name || `Workspace ${w.id.substring(0, 8)}`,
+            email: w.email || 'user@postcake.io',
+            plan: tier as any,
+            status: (w.subscription_status || w.sub_status || 'active') as any,
+            connected_platforms: ['Instagram', 'YouTube', 'TikTok', 'X (Twitter)'],
+            posts_count: 0,
+            last_active: w.updated_at || new Date().toISOString(),
+            signup_date: w.created_at ? w.created_at.split('T')[0] : '2026-09-01',
+            mrr_contribution: mrr,
+            notes_count: w.override_reason ? 1 : 0,
+            is_admin_override: Boolean(w.admin_override),
+            override_reason: w.override_reason || undefined,
+            custom_limits: w.custom_limits || undefined,
+          };
+        });
+      }
+
+      // 2. Direct workspaces query fallback
       const { data, error } = await supabase
         .from('workspaces')
         .select(`
@@ -101,8 +131,11 @@ class AdminService {
         .order('created_at', { ascending: false });
 
       if (!error && Array.isArray(data) && data.length > 0) {
-        // Query subscriptions to check for admin overrides & custom limits
-        const { data: subs } = await supabase.from('subscriptions').select('*');
+        let subs: any[] = [];
+        try {
+          const { data: subsData } = await supabase.from('subscriptions').select('*');
+          if (Array.isArray(subsData)) subs = subsData;
+        } catch {}
         const subMap = new Map((subs || []).map((s: any) => [s.workspace_id, s]));
 
         return data.map((w: any) => {
@@ -113,7 +146,7 @@ class AdminService {
           return {
             id: w.id,
             name: w.name || `Workspace ${w.id.substring(0, 8)}`,
-            email: `contact@${w.name?.toLowerCase().replace(/[^a-z0-9]/g, '') || 'workspace'}.io`,
+            email: 'admin@postcake.io',
             plan: tier as any,
             status: (w.subscription_status || sub?.status || 'active') as any,
             connected_platforms: ['Instagram', 'YouTube', 'TikTok', 'X (Twitter)'],

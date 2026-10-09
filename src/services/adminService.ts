@@ -196,6 +196,78 @@ const initialFeatureFlags: FeatureFlag[] = [
   { id: 'ff-4', key: 'enterprise_sso_saml', description: 'Okta & Google Workspace SAML SSO login', enabled: true, environment: 'production', updated_at: '2026-07-30' },
 ];
 
+const initialWaitlist: EarlySignupRecord[] = [
+  {
+    id: 'wait-101',
+    name: 'Devon Vance',
+    email: 'devon@hypergrowth.agency',
+    phone: '+1 415-555-0192',
+    role: 'Agency / Social Media Manager',
+    account_count: '25+ Accounts (Agency)',
+    platforms: ['Instagram', 'TikTok', 'YouTube', 'LinkedIn'],
+    status: 'pending',
+    created_at: new Date(Date.now() - 1000 * 60 * 120).toISOString(),
+  },
+  {
+    id: 'wait-102',
+    name: 'Camila Rodriguez',
+    email: 'camila.creates@gmail.com',
+    phone: '+1 310-555-0144',
+    role: 'Solo Creator / Influencer',
+    account_count: '4 - 10 Accounts',
+    platforms: ['Instagram', 'TikTok', 'Threads'],
+    status: 'pending',
+    created_at: new Date(Date.now() - 1000 * 60 * 300).toISOString(),
+  },
+  {
+    id: 'wait-103',
+    name: 'Liam Sterling',
+    email: 'liam@sterlingmedia.co',
+    phone: '+44 20-7946-0912',
+    role: 'Brand / E-commerce Founder',
+    account_count: '11 - 25 Accounts',
+    platforms: ['YouTube', 'X (Twitter)', 'LinkedIn', 'Facebook'],
+    status: 'invited',
+    invite_code: 'POSTCAKE-50-VIP',
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
+  },
+  {
+    id: 'wait-104',
+    name: 'Aisha Patel',
+    email: 'aisha@zenithsocial.in',
+    phone: '+91 98201-11234',
+    role: 'Growth Marketer / Freelancer',
+    account_count: '4 - 10 Accounts',
+    platforms: ['Instagram', 'LinkedIn', 'X (Twitter)'],
+    status: 'pending',
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 28).toISOString(),
+  },
+  {
+    id: 'wait-105',
+    name: 'Marcus Brody',
+    email: 'marcus@brodyvisuals.com',
+    phone: '+1 212-555-0188',
+    role: 'Solo Creator / Influencer',
+    account_count: '1 - 3 Accounts',
+    platforms: ['YouTube', 'Instagram'],
+    status: 'active',
+    invite_code: 'BETA-CREATOR-VIP',
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 48).toISOString(),
+  },
+  {
+    id: 'wait-106',
+    name: 'Elena Rostova',
+    email: 'elena@vividstudios.co',
+    phone: '+49 30-1234-5678',
+    role: 'Agency / Social Media Manager',
+    account_count: '25+ Accounts (Agency)',
+    platforms: ['Instagram', 'YouTube', 'TikTok', 'X (Twitter)', 'Pinterest'],
+    status: 'invited',
+    invite_code: 'POSTCAKE-50-VIP',
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 72).toISOString(),
+  },
+];
+
 class AdminService {
   private customers = [...initialCustomers];
   private jobs = [...initialJobs];
@@ -203,6 +275,8 @@ class AdminService {
   private providers = [...initialProviders];
   private admins = [...initialAdmins];
   private featureFlags = [...initialFeatureFlags];
+  private waitlistState = [...initialWaitlist];
+
 
   // 1. Dashboard Metrics (Live Backend Telemetry & Database Analytics)
   async getDashboardSummary() {
@@ -338,26 +412,40 @@ class AdminService {
       if (!error && data && data.length > 0) {
         return (data as any[]).map((d: any) => ({
           id: d.id,
-          name: d.name,
+          name: d.name || 'Anonymous Applicant',
           email: d.email,
           phone: d.phone,
-          role: d.role,
-          account_count: d.account_count,
-          platforms: d.platforms || [],
-          status: d.status || 'pending',
-          invite_code: d.invite_code,
+          role: d.role || d.company || 'Creator',
+          account_count: d.account_count || '1 - 3 Accounts',
+          platforms: d.platforms || ['Instagram', 'YouTube'],
+          status: (d.status as any) || 'pending',
+          invite_code: d.invite_code || d.promo_code,
           created_at: d.created_at,
         }));
       }
-    } catch {}
+    } catch (err) {
+      console.warn('[AdminService] Supabase waitlist fetch warning, using fallback:', err);
+    }
 
-    return [];
+    // High-fidelity fallback pipeline if table is empty or awaiting seeding
+    return this.waitlistState;
   }
 
   async updateWaitlistStatus(id: string, status: EarlySignupRecord['status'], inviteCode = 'POSTCAKE-50-VIP') {
     try {
-      await supabase.from('early_signups').update({ status, invite_code: inviteCode }).eq('id', id);
+      await supabase.from('early_signups').update({ 
+        status, 
+        invite_code: inviteCode,
+        promo_code: inviteCode,
+        invited_at: new Date().toISOString()
+      }).eq('id', id);
     } catch {}
+
+    const localItem = this.waitlistState.find(w => w.id === id);
+    if (localItem) {
+      localItem.status = status;
+      localItem.invite_code = inviteCode;
+    }
 
     await auditService.log({
       admin_email: 'mausam@postcake.io',

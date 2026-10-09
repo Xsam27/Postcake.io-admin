@@ -33,12 +33,16 @@ export const FailedJobsPage: React.FC = () => {
     }
   };
 
-  // Group by error cluster
-  const errorClusters = [
-    { code: '429 Rate Limit', count: failedJobs.filter(j => j.error_message?.includes('429')).length || 1, provider: 'Instagram / Meta' },
-    { code: 'Token Expired', count: 0, provider: 'YouTube Data API' },
-    { code: 'Timeout (Gateway 504)', count: 0, provider: 'Media Transcoder' },
-  ];
+  // Group by error cluster dynamically from real failed jobs
+  const errorMap: Record<string, { code: string; count: number; provider: string }> = {};
+  failedJobs.forEach((j) => {
+    const code = j.error_code || 'API Error';
+    if (!errorMap[code]) {
+      errorMap[code] = { code, count: 0, provider: j.provider || 'Platform API' };
+    }
+    errorMap[code].count++;
+  });
+  const errorClusters = Object.values(errorMap);
 
   return (
     <div className="space-y-6 font-sans animate-fade-in">
@@ -65,15 +69,17 @@ export const FailedJobsPage: React.FC = () => {
       </div>
 
       {/* Error Clusters Breakdown */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {errorClusters.map((cluster, idx) => (
-          <div key={idx} className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 p-5 rounded-3xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-            <div className="text-[10px] font-black uppercase text-zinc-600 dark:text-zinc-400">{cluster.provider}</div>
-            <div className="text-xl font-display font-black text-rose-400 mt-1">{cluster.code}</div>
-            <div className="text-xs font-bold text-zinc-500 mt-1">{cluster.count} occurrences today</div>
-          </div>
-        ))}
-      </div>
+      {errorClusters.length > 0 && (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {errorClusters.map((cluster, idx) => (
+            <div key={idx} className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 p-5 rounded-3xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <div className="text-[10px] font-black uppercase text-zinc-600 dark:text-zinc-400">{cluster.provider}</div>
+              <div className="text-xl font-display font-black text-rose-400 mt-1">{cluster.code}</div>
+              <div className="text-xs font-bold text-zinc-500 mt-1">{cluster.count} occurrences today</div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Failed Jobs List */}
       <div className="bg-[#121216] border-3 border-zinc-300 dark:border-zinc-800 rounded-3xl p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">

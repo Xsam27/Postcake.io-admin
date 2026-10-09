@@ -56,7 +56,7 @@ export const AdminLoginPage: React.FC = () => {
     }
   };
 
-  const handleFillDemoCredentials = () => {
+  const handleFillOwnerCredentials = () => {
     setEmail('mausam@postcake.io');
     setPassword('YourNewPassword123!');
   };
@@ -170,7 +170,7 @@ export const AdminLoginPage: React.FC = () => {
               </button>
               <button
                 type="button"
-                onClick={handleFillDemoCredentials}
+                onClick={handleFillOwnerCredentials}
                 className="py-2.5 px-3 bg-white dark:bg-zinc-800 hover:bg-zinc-100 text-zinc-900 dark:text-white font-black text-[11px] uppercase tracking-wider rounded-xl border-2 border-zinc-300 dark:border-zinc-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center gap-1.5 cursor-pointer transition-all"
               >
                 <KeyRound className="w-3.5 h-3.5 text-[#FF7A00]" /> Fill Form

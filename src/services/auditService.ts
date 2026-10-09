@@ -2,27 +2,7 @@ import { supabase } from '../lib/supabase';
 import { AuditLogEntry } from '../types/admin';
 
 class AuditLogger {
-  private inMemoryLogs: AuditLogEntry[] = [
-    {
-      id: 'log-001',
-      admin_email: 'mausam@postcake.io',
-      action: 'SYSTEM_BOOT',
-      target_resource: 'system_settings',
-      details: { environment: 'production', version: '2.4.0' },
-      created_at: new Date(Date.now() - 1000 * 60 * 15).toISOString(),
-      ip_address: '127.0.0.1',
-    },
-    {
-      id: 'log-002',
-      admin_email: 'mausam@postcake.io',
-      action: 'GENERATED_PROMO_CODE',
-      target_resource: 'early_signups',
-      target_id: 'usr-142',
-      details: { code: 'POSTCAKE-50-VIP', discount: '50% Lifetime' },
-      created_at: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
-      ip_address: '127.0.0.1',
-    },
-  ];
+  private inMemoryLogs: AuditLogEntry[] = [];
 
   async log(entry: Omit<AuditLogEntry, 'id' | 'created_at'>): Promise<AuditLogEntry> {
     const fullEntry: AuditLogEntry = {

@@ -13,19 +13,12 @@ export const AdminUsersPage: React.FC = () => {
     adminService.getAdmins().then(setAdmins);
   }, []);
 
-  const handleInvite = (e: React.FormEvent) => {
+  const handleInvite = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inviteEmail) return;
-    const newAdmin: AdminUser = {
-      id: `adm-${Date.now()}`,
-      name: inviteEmail.split('@')[0],
-      email: inviteEmail,
-      role: inviteRole,
-      status: 'active',
-      created_at: new Date().toISOString().split('T')[0],
-      last_login: 'Pending invite acceptance',
-    };
-    setAdmins([...admins, newAdmin]);
+    await adminService.createAdmin(inviteEmail, inviteRole);
+    const updated = await adminService.getAdmins();
+    setAdmins(updated);
     setShowInviteModal(false);
     setInviteEmail('');
   };
